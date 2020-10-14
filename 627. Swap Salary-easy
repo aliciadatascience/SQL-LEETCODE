@@ -20,7 +20,7 @@ After running your update statement, the above salary table should have the foll
 | 3  | C    | f   | 5500   |
 | 4  | D    | m   | 500    |
 
-## Solution
+## Solution (UPDATE...set; CASE WHEN)
 
 solution1:
 	key: UPDATE用新值更新原表中的各列，SET指示修改哪些列和要给予哪些值
