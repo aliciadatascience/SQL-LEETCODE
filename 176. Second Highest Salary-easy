@@ -24,7 +24,7 @@ solution1:
 	FROM employee
 	WHERE salary < (SELECT MAX(salary) FROM employee) ↔ WHERE salary NOT IN (SELECT MAX(salary) FROM employee)
 
-solution1:
+solution2:
 	Key: the DISTINCT is to avoid the first one and the second one are equal
 	
 	SELECT (SELECT DISTINCT salary FROM employee
