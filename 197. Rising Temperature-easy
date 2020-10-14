@@ -37,9 +37,9 @@ Result table:
 In 2015-01-02, temperature was higher than the previous day (10 -> 25).
 In 2015-01-04, temperature was higher than the previous day (30 -> 20).
 
-##Solution:
+##Solution:(sub-query)
 solution1:
-	SELECT weather.id AS id
+	SELECT weather.id AS id 
 	FROM weather JOIN weather w 
 	ON DATEDIFF(weather.recordDate, W.redordDate) = 1
 	AND weather.Temperature > w.Temperature
