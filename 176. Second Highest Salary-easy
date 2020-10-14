@@ -1,0 +1,38 @@
+Write a SQL query to get the second highest salary from the Employee table.
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200                 |
++---------------------+
+
+## solution:
+solution1:
+	key: MAX() will return a NULL if the value doesn't exist.
+
+	SELECT MAX(salary) SecondHighestSalary
+	FROM employee
+	WHERE salary < (SELECT MAX(salary) FROM employee) ↔ WHERE salary NOT IN (SELECT MAX(salary) FROM employee)
+
+solution1:
+	Key: the DISTINCT is to avoid the first one and the second one are equal
+	
+	SELECT (SELECT DISTINCT salary FROM employee
+			ORDER BY salary DESC
+			LIMIT 1 OFFSET 1) AS SecondHighestSalary
+
+Wrong answer: if there is no such second highest salary since there might be only one record in the table.
+	SELECT DISTINCT salary AS SecondHighestSalary
+	FROM employee
+	ORDER BY salary DESC
+	LIMIT 1 OFFSET 1
