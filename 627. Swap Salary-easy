@@ -23,10 +23,10 @@ After running your update statement, the above salary table should have the foll
 ## Solution
 
 solution1:
-key: UPDATE用新值更新原表中的各列，SET指示修改哪些列和要给予哪些值
-UPDATE salary
+	key: UPDATE用新值更新原表中的各列，SET指示修改哪些列和要给予哪些值
+	UPDATE salary
 	SET sex = (CASE WHEN sex = 'm' THEN 'f' ELSE 'm' END)
 
 solution2:
-UPDATE salary
+	UPDATE salary
 	SET sex = IF(sex = 'm', 'f', 'm')
