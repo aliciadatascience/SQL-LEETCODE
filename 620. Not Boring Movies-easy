@@ -22,3 +22,13 @@ For the example above, the output should be:
 +---------+-----------+--------------+-----------+
 
 ##solution
+solution 1:
+	SELECT * FROM cinema
+	WHERE id%2 != 0 and description != 'boring'
+	ORDER BY rating DESC
+
+solution 2:
+key:SQL中的求余函数MOD（a,b）----a除以b的余数
+	Select * FROM cinema
+	WHERE MOD(id,2)=1 and description != 'boring'
+	ORDER BY rating DESC
