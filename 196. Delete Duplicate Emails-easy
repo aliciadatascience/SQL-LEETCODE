@@ -1,0 +1,34 @@
+Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.
+
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
+| 3  | john@example.com |
++----+------------------+
+Id is the primary key column for this table.
+For example, after running your query, the above Person table should have the following rows:
+
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
++----+------------------+
+
+###solution
+solution 1:
+key:直接使用delete语句
+	DELETE P1 FROM Person P1, Person P2
+	WHERE P1.Email = P2.Email AND P1.Id > P2.Id
+
+solution 2:
+	DELETE FROM Person
+	WHERE Id NOT IN (SELECT t.id FROM (SELECT MIN(id) as id FROM Person GROUP BY email) t)
+	
+以下语句错误的原因的是不能先select了一些值，然后又去修改（比如，这里的删除）这个表
+	DELETE FROM Person
+	WHERE Id NOT IN (SELECT MIN(id) as id FROM Person GROUP BY email) 
+
+？？？为什么不能使用SELECT MIN(id) as id FROM Person GROUP BY email
