@@ -17,6 +17,8 @@ For example, after running your query, the above Person table should have the fo
 | 2  | bob@example.com  |
 +----+------------------+
 
+Note：Your output is the whole Person table after executing your sql. Use delete statement.
+
 ###solution
 solution 1:
 key:直接使用delete语句
