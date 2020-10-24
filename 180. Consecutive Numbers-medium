@@ -1,0 +1,58 @@
+Write a SQL query to find all numbers that appear at least three times consecutively.
+
++----+-----+
+| Id | Num |
++----+-----+
+| 1  |  1  |
+| 2  |  1  |
+| 3  |  1  |
+| 4  |  2  |
+| 5  |  1  |
+| 6  |  2  |
+| 7  |  2  |
++----+-----+
+For example, given the above Logs table, 1 is the only number that appears consecutively for at least three times.
++-----------------+
+| ConsecutiveNums |
++-----------------+
+| 1               |
++-----------------+
+
+###solution:
+solution 1:
+key:因为有重复的一定要使用DISTINCT; 不能连着用两个‘=’，比如，L1.Num=L2.Num AND L1.Num=L3.Num；
+    这种方法要求ID是连续的；
+	
+	SELECT DISTINCT L1.Num ConsecutiveNums
+	FROM Logs L1, Logs L2, Logs L3
+	WHERE L1.Id+1=L2.Id AND L2.Id+1=L3.Id AND L1.Num=L2.Num AND L1.Num=L3.Num
+	
+	SELECT DISTINCT num as ConsecutiveNums
+	FROM logs
+	WHERE (Id+1, Num) in (SELECT * FROM logs) AND (Id+2, num) in (SELECT * FROM logs)
+
+solution 2:
+key:用到了用户自定义变量，这种方法比自关联或自连接效率更高
+第一种设置了2个变量：@prev,@count
+	SELECT DISTINCT num AS ConsecutiveNums
+	FROM (SELECT num, CASE WHEN @prev = num THEN @count := @count+1 
+						   WHEN @prev := num THEN @count :=1
+					  END AS cnt
+		  FROM logs, (SELECT @prev:=NULL, @count:=NULL) AS t) AS temp
+     WHERE temp.cnt >= 3
+
+第二种设置了2个变量：@record,@count
+	 SELECT DISTINCT num Consecutivenums
+	 FROM (SELECT num, CASE WHEN @record = num THEN @count := @count+1
+	                        WHEN @record :=num THEN @count :=1 
+					   END AS n
+		   FROM logs, (SELECT @count:=0, @record:=(SELECT num FROM logs LIMIT 1)) r) a
+	 WHERE a.n>=3
+	 
+solution 3:
+key:用到了window functions
+	SELECT DISTINCT num Consecutivenums
+	FROM (SELECT num, sum(c) over (order by id) AS flag
+		  FROM (SELECT id,num, case when LAG(num) over (order by id)-num=0 THEN 0 ELSE 1 END AS c FROM logs) a) b
+	GROUP BY num,flag
+	HAVING count(*)>=3
