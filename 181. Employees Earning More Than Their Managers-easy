@@ -1,0 +1,38 @@
+The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.
+
++----+-------+--------+-----------+
+| Id | Name  | Salary | ManagerId |
++----+-------+--------+-----------+
+| 1  | Joe   | 70000  | 3         |
+| 2  | Henry | 80000  | 4         |
+| 3  | Sam   | 60000  | NULL      |
+| 4  | Max   | 90000  | NULL      |
++----+-------+--------+-----------+
+Given the Employee table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.
+
++----------+
+| Employee |
++----------+
+| Joe      |
++----------+
+
+###solution:
+knowledge: The SQL CROSS JOIN produces a result set which is the number of rows in the first table multiplied by the number of rows in the second table if no WHERE clause is used along with CROSS JOIN. This kind of result is called as Cartesian Product.
+           If WHERE clause is used with CROSS JOIN, it functions like an INNER JOIN.
+           eg: FROM foods CROSS JOIN company或者写成FROM foods, company
+
+soution 1:
+	SELECT a.name AS Employee
+	FROM employee a, employee b
+	WHERE a.managerId = b.Id AND a.salary > b.Salary
+  
+solution 2:
+	SELECT a.name Employee
+	FROM Employee a JOIN Employee b
+	ON a.managerId=b.Id AND a.salary > b.salary
+	
+solution 3:
+	SELECT a.name AS Employee
+	FROM employee a, employee b
+	ON a.managerId=b.ID
+	WHERE a.salary > b.salary
