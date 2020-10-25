@@ -44,3 +44,11 @@ Wrong answer: if there is no such second highest salary since there might be onl
 	FROM employee
 	ORDER BY salary DESC
 	LIMIT 1 OFFSET 1
+
+solution 4:
+	key:使用window function排序函数rank over
+	
+	SELECT COALESCE(MAX(salary), NULL) SecondHighestSalary
+	FROM (SELECT salary, RANK() OVER(ORDER BY salary DESC) AS rnk
+	      FROM Employee) a
+	WHERE rnk = 2
