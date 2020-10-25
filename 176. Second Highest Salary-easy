@@ -17,19 +17,27 @@ For example, given the above Employee table, the query should return 200 as the 
 +---------------------+
 
 ## solution: (sub-query)
-solution1:
+solution 1:
 	key: MAX() will return a NULL if the value doesn't exist.
 
 	SELECT MAX(salary) SecondHighestSalary
 	FROM employee
 	WHERE salary < (SELECT MAX(salary) FROM employee) ↔ WHERE salary NOT IN (SELECT MAX(salary) FROM employee)
 
-solution2:
+solution 2:
 	Key: the DISTINCT is to avoid the first one and the second one are equal
 	
 	SELECT (SELECT DISTINCT salary FROM employee
 			ORDER BY salary DESC
 			LIMIT 1 OFFSET 1) AS SecondHighestSalary
+
+solution 3:
+	key:coalesce(expression,null...)作用是返回传入参数中第一个非null的值
+	
+	SELECT COALESCE((SELECT DISTINCT salary 
+			 FROM Employee
+			 ORDER BY salary DESC
+			 LIMIT 1,1), NULL) SecondHighestSalary
 
 Wrong answer: if there is no such second highest salary since there might be only one record in the table.
 	SELECT DISTINCT salary AS SecondHighestSalary
