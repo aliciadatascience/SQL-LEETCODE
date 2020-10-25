@@ -1,0 +1,9 @@
+1. ROW_NUMBER OVER
+   1）一般用来实现Web程序的分页，会为查询的每一条记录生成一个序号
+   2）over字句中的order by与SQL语句中的order by没有任何关系，可以不同。但如果使用row_number实现分页时需要保持一致
+
+2. RANK OVER
+   当over中排序字段相同时，rank给出的序号一致，后面的值要跳过重复值。比如，1，1,3
+
+3. DENSE_RANK OVER
+   1) dense_rank函数生成序号是连续的
