@@ -36,17 +36,17 @@ key:用到了用户自定义变量，这种方法比自关联或自连接效率�
 第一种设置了2个变量：@prev,@count
 	SELECT DISTINCT num AS ConsecutiveNums
 	FROM (SELECT num, CASE WHEN @prev = num THEN @count := @count+1 
-						   WHEN @prev := num THEN @count :=1
-					  END AS cnt
-		  FROM logs, (SELECT @prev:=NULL, @count:=NULL) AS t) AS temp
+			       WHEN @prev := num THEN @count :=1
+			       END AS cnt
+              FROM logs, (SELECT @prev:=NULL, @count:=NULL) AS t) AS temp
      WHERE temp.cnt >= 3
 
 第二种设置了2个变量：@record,@count
 	 SELECT DISTINCT num Consecutivenums
 	 FROM (SELECT num, CASE WHEN @record = num THEN @count := @count+1
 	                        WHEN @record :=num THEN @count :=1 
-					   END AS n
-		   FROM logs, (SELECT @count:=0, @record:=(SELECT num FROM logs LIMIT 1)) r) a
+				END AS n
+	        FROM logs, (SELECT @count:=0, @record:=(SELECT num FROM logs LIMIT 1)) r) a
 	 WHERE a.n>=3
 	 
 solution 3:
