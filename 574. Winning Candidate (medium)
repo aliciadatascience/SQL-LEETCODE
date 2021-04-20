@@ -36,3 +36,11 @@ You may assume there is no tie, in other words there will be at most one winning
 SELECT Name FROM Candidate
 WHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(*) DESC LIMIT 1);
 
+## TIPS:
+First, find the CandidateId having the most votes in Vote table:
+SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(*) DESC LIMIT 1;
+
+Then,output Name of the candidate whose id is the CandidateId with most votes:
+SELECT Name FROM Candidate
+WHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(*) DESC LIMIT 1);
+
