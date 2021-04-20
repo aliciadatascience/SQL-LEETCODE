@@ -1,0 +1,57 @@
+## QUESTION:
+The Numbers table keeps the value of number and its frequency.
++----------+-------------+
+|  Number  |  Frequency  |
++----------+-------------|
+|  0       |  7          |
+|  1       |  1          |
+|  2       |  3          |
+|  3       |  1          |
++----------+-------------+
+
+In this table, the numbers are 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 3, so the median is (0 + 0) / 2 = 0.
++--------+
+| median |
++--------|
+| 0.0000 |
++--------+
+Write a query to find the median of all numbers and name the result as median.
+
+
+## SOLUTION:
+SOLUTION1:
+SELECT AVG(Number) median
+FROM
+(
+  (
+   SELECT Number 
+   From
+   (SELECT Number, SUM(Frequency)OVER(ORDER by Number ACS) presum
+    FROM Numbers) t1
+    WHERE presum >= CEILING((SELECT SUM(Frequency) FROM Numbers)/2)
+    ORDER BY Number
+    LIMIT 1
+   )
+   UNION ALL
+   (
+   SELECT Number
+   FROM 
+   (SELECT Numbers, SUM(Frequency)OVER(ORDER BY Number DESC) aftersum
+    FROM Numbers) t2
+    WHERE aftersum >= CEILING((SELECT SUM(Frequency) FROM Numbers)/2)
+    ORDER BY Number DESC
+    LIMIT 1
+   )
+) temp
+
+
+SOLUTION2:
+SELECT AVG(Number) Median
+FROM
+(
+  SELECT Number, SUM(Frequency)OVER(ORDER BY Number ACS) c1,
+                 SUM(Frequency)OVER(ORDER BY Number DESC) c2,
+                 SUM(Frequency)OVER() cnt
+  FROM Numbers
+) t
+WHERE c1> = cnt/2 and c2 >= cnt/2
