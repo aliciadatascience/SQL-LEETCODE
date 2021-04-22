@@ -1,3 +1,3 @@
-# SQL-LEETCODE
+# LEETCODE-SQL
 
-LEETCODE-SQL questions
+
