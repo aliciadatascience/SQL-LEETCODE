@@ -4,7 +4,7 @@ SELECT u.user_id AS seller_id,
 FROM users u
 LEFT JOIN (
 		   SELECT seller_id, a.item_id, item_brand
-		   FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sell_id order by order_date) rnk
+		   FROM (SELECT *, RANK() OVER (PARTITION BY sell_id ORDER BY order_date) rnk
 		         FROM orders) a
 		   JOIN items i
 		   ON a.item_id = i.item_id
