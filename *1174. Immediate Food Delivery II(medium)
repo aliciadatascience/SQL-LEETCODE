@@ -1,4 +1,4 @@
-## SOLUTION
+## SOLUTION 1
 SELECT ROUND(SUM(CASE WHEN first_order_date = customer_pref_delivery_date THEN 1 ELSE 0)/COUNT(first_order_date)*100, 2) AS immediate_percentage
 FROM (
       SELECT customer_id, MIN(ORDER_DATE)OVER(PARTITION BY customer_id) AS first_order_date
@@ -7,6 +7,13 @@ JOIN Delivery d
 ON a.customer_id = d.customer_id AND a.first_order_date = d.order_date
 
 
+## SOLUTION 2
+SELECT ROUND(SUM(CASE WHEN order_date = customer_pref_delivery_date THEN 1 ELSE 0 END) *100.0/ COUNT(delivery_id), 2) AS immediate_percentage
+FROM delivery
+WHERE (customer, order_date) in
+      (SELECT customer_id, MIN(order_date)
+       FROM delivery
+       GROUP BY customer_id)
 
 
 
