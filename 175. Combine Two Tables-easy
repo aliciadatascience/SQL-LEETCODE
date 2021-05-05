@@ -1,3 +1,10 @@
+###solution:
+SELECT FirstName, LastName, City, State
+FROM Person 
+LEFT JOIN Address
+ON Person.PersonId = Address.PersonId
+
+
 Table: Person
 
 +-------------+---------+
@@ -24,15 +31,5 @@ AddressId is the primary key column for this table.
 Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:
 FirstName, LastName, City, State
 
-###solution:
-Usually Wrong Answer:
-	key:这个语句的问题是一定既在P中也在A中才能被选择出来，但是问题要——是所有的在P中的都显示，不管在不在A中
-	SELECT P.Firstname, P.Lastname, A.City, A.State
-	FROM Person P, Address A
-	WHERE P.PersonId = A.PersonId
 
-solution 1:
-	SELECT FirstName, LastName, City, State
-	FROM Person LEFT JOIN Address
-	ON Person.PersonId = Address.PersonId
  
