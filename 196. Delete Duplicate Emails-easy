@@ -21,7 +21,6 @@ Note：Your output is the whole Person table after executing your sql. Use delet
 
 ###solution
 solution 1:
-key:直接使用delete语句
 	DELETE P1 FROM Person P1, Person P2
 	WHERE P1.Email = P2.Email AND P1.Id > P2.Id
 
@@ -33,5 +32,3 @@ solution 2:
 	DELETE FROM Person
 	WHERE Id NOT IN (SELECT MIN(id) as id FROM Person GROUP BY email) 
 
-？？？
-为什么不能使用SELECT MIN(id) as id FROM Person GROUP BY email
