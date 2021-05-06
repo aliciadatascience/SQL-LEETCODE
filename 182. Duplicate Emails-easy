@@ -23,7 +23,7 @@ solution 1:
 	FROM Person P1, Person P2
 	WHERE P1.id != P2.id and P1.email=P2.email
 
-solution 2:
+solution 2:（good one)
 	SELECT Email 
 	FROM Person
 	GROUP BY Email
