@@ -45,7 +45,7 @@ solution1:
 	AND weather.Temperature > w.Temperature
 
 solution2:
-	key:TO_DAYS() return the number of days between from year o to the date
+	key:TO_DAYS() return the number of days between from year to the date
 	
 	SELECT wt1.id AS ID
 	FROM weather wt1, weather wt2
