@@ -12,10 +12,7 @@ FROM (
          t1.play_id = t2.play_id
 GROUP BY a.install_date
 ORDER BY a.install_date
-     
-
-
-
+    
 
 
 
