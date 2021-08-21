@@ -1,7 +1,6 @@
 ## SOLUTION 1
 SELECT ROUND(AVG(remove_cnt/total),2) AS average_daily_percent
-FROM (
-		SELECT action_date,
+FROM (SELECT action_date,
 			   COUNT(DISTINCT CASE WHEN action='report' AND extra='spam' THEN post_id END) AS total
 			   COUNT(DISTINCT CASE WHEN action='report' AND extra='spam' AND post_id IN (SELECT post_id FROM Removals) THEN post_id END) AS remove_cnt
 	     FROM Actions
