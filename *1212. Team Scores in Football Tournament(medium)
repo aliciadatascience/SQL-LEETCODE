@@ -25,6 +25,7 @@ GROUP BY team_id, team_name
 ORDER BY num_point DESC, team_id
 
 
+
 ## SOLUTION 2
 SELECT t.team_id, t.team_name,
        ifnull(SUM(CASE WHEN t.team_id = m.host_team AND m.host_goals > m.guest_goals THEN 3
