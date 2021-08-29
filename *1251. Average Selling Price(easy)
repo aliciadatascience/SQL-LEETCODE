@@ -10,8 +10,6 @@ GROUP BY p.product_id
 
 
 
-
-
 Table: Prices
 
 +---------------+---------+
