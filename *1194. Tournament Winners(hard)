@@ -1,5 +1,6 @@
 ## SOLUTION
 
+
 WITH combine AS (
                  SELECT first_player AS player, first_score AS score, group_id
                  FROM Matches m
