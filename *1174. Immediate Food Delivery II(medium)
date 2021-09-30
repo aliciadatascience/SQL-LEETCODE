@@ -16,11 +16,7 @@ WHERE (customer, order_date) in
        FROM delivery
        GROUP BY customer_id)
 
-
-
-
-
-Table: Delivery
+table: Delivery
 
 +-----------------------------+---------+
 | Column Name                 | Type    |
