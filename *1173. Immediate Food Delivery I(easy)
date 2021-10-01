@@ -7,8 +7,7 @@ FROM Delivery d1,
 
 ## SOLUTION 2 (better)
 SELECT ROUND(SUM(CASE WHEN order_state = customer_pref_delivery_date THEN 1 ELSE 0 END)/COUNT(delivery_id)*100, 2) AS immediate_percentage
-FROM delivery  
-
+FROM delivery 
 
 
 Table: Delivery
