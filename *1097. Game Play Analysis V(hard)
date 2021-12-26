@@ -1,4 +1,5 @@
 ### SOLUTION
+
 SELECT a.install_date AS install_dt, 
        count(a.install_date) AS installs
        round(count(t.event_date) / count(a.install_date), 2) AS Day1_retention
