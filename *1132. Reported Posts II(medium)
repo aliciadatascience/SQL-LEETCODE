@@ -88,3 +88,5 @@ The percentage for 2019-07-04 is 50% because only one post of two spam reported 
 The percentage for 2019-07-02 is 100% because one post was reported as spam and it was removed.
 The other days had no spam reports so the average is (50 + 100) / 2 = 75%
 Note that the output is only one number and that we do not care about the remove dates.
+
+
